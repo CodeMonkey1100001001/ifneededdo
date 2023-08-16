@@ -7,6 +7,9 @@
 # find tests | python3 ./ifneededdo.py -o ".jpg" -c "cat %1 %2"
 # generate and run example
 # find tests | python3 ./ifneededdo.py -o ".jpg" -c "cat %1 %2" | xjobs -j4
+#
+# script tests that no / is included and that the generated command is longer than
+# 20 characters, for safety
 import sys
 import os.path
 from pathlib import Path
@@ -47,4 +50,4 @@ for line in sys.stdin:
         if (cleanCommandEh == True):
             print(newCommand)
         else:
-            print("echo BADDDDD",newCommand)
+            print("echo BADDDDD command given use percent signs",newCommand)
