@@ -18,12 +18,12 @@ import argparse
 parser = argparse.ArgumentParser(description='Command line basic gcode sender for marlin polargraph')
 parser.add_argument('-o', '--output', help='Output file', required=True)
 parser.add_argument('-c', '--command', help='Command to run', required=True)
-parser.add_argument('-n', '--nosubs',help='Do not allow sub directories (default True)', required=False,default=True)
+parser.add_argument('-a', '--allowsubs',help='Allow sub directories (default False)', required=False,default=False)
 args = parser.parse_args()
 
 outFile = args.output
 commandEh = args.command
-noSubDirs = args.nosubs
+allowSubs = args.nosubs
 
 #print("echo inFile",inFile)
 print("echo outFile",outFile)
@@ -45,7 +45,8 @@ for line in sys.stdin:
         if len(newCommand) > 20 :
             cleanCommandEh = True
         
-        if newCommand.count("/") > 2 and noSubDirs == True :
+        if newCommand.count("/") > 2 and allowSubs == False :
+            print("echo Subdir detected but not allowed.")
             cleanCommandEh = False
 
 
